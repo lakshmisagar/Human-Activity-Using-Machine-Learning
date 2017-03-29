@@ -7,11 +7,15 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import static group22.android.com.assign3.GlobalConstants.Activity_type;
 import static group22.android.com.assign3.GlobalConstants.isDBupdated;
 import static group22.android.com.assign3.GlobalConstants.sensorCount;
 import static group22.android.com.assign3.GlobalConstants.valueHolder;
+import static group22.android.com.assign3.GlobalConstants.valueHolderClassify;
 
 public class MainActivity extends AppCompatActivity {
     private static String TAG = MainActivity.class.getName().toString();
@@ -66,6 +70,11 @@ public class MainActivity extends AppCompatActivity {
             progressDialog.dismiss();
             isDBupdated = true;
             stopService(serviceIntent);
+            if(Activity_type.equals("classify")) {
+                AndroidLibSVM androidLibSVM = new AndroidLibSVM();
+                String activity = androidLibSVM.classify(valueHolderClassify);
+                Toast.makeText(getApplicationContext(),activity,Toast.LENGTH_LONG).show();
+            }
         };
     }
 
@@ -90,4 +99,21 @@ public class MainActivity extends AppCompatActivity {
         task.execute();
     }
 
+    public void onTrainingClicked(View v) {
+       /* ArrayList<DataValues> activityDataArrayList = generateTrainingSetFile();
+        if (activityDataArrayList.size() > 0) {*/
+            AndroidLibSVM androidLibSVM = new AndroidLibSVM();
+            androidLibSVM.train();
+        /*} else {
+            Log.w(this.getClass().getSimpleName(), "Insufficient Data");
+        }*/
+    }
+
+    public void onClassifyClick(View v) {
+        Log.d(TAG,"  onClassifyClick()");
+        Activity_type = "classify";
+        valueHolderClassify = new ArrayList<DataValues>();
+        LoadData task = new LoadData();
+        task.execute();
+    }
 }

@@ -19,5 +19,7 @@ public class GlobalConstants {
     static int sensorCount = 0;
     static boolean isDBupdated = false;
     static String Activity_type = "Running";
+    static String FileName = " Sensor_data";
     static ArrayList<DataValues> valueHolder = new ArrayList<DataValues>();
+    static ArrayList<DataValues> valueHolderClassify = new ArrayList<DataValues>();
 }

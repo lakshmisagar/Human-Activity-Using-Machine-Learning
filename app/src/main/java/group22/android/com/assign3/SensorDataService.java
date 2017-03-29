@@ -12,8 +12,10 @@ import android.hardware.SensorManager;
 import android.os.IBinder;
 import android.util.Log;
 
+import static group22.android.com.assign3.GlobalConstants.Activity_type;
 import static group22.android.com.assign3.GlobalConstants.sensorCount;
 import static group22.android.com.assign3.GlobalConstants.valueHolder;
+import static group22.android.com.assign3.GlobalConstants.valueHolderClassify;
 
 /**
  * Created by Lakshmisagar on 3/22/2017.
@@ -65,15 +67,21 @@ public class SensorDataService extends Service implements SensorEventListener{
         Sensor sensor = event.sensor;
         if(sensor.getType()==Sensor.TYPE_ACCELEROMETER && sensorCount < 50){
             DataValues accelrometerData = new DataValues(event.values[0],event.values[1],event.values[2]);
-            valueHolder.add(accelrometerData);
+            if(Activity_type.equals("classify")){
+                valueHolderClassify.add(accelrometerData);
+            }else {
+                valueHolder.add(accelrometerData);
+            }
             sensorCount++;
         }else if(sensorCount==50 && sqLiteDatabase != null) {
             sensorCount++;
-            MyDB.insertIntoDB(sqLiteDatabase);
             if(sensorManager!=null) {
                 sensorManager.unregisterListener(this);
             }
-            MyDB.getDBData(sqLiteDatabase);
+            if(!Activity_type.equals("classify")) {
+                MyDB.insertIntoDB(sqLiteDatabase);
+                MyDB.getAllDataToFile(sqLiteDatabase);
+            }
         }
     }
 

@@ -26,32 +26,62 @@
     android:onClick="onWalkingClick"    />
 
     <Button
-        android:text="Running"
+        android:text="Classify"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/walking"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="47dp"
-        android:id="@+id/running"
+        android:id="@+id/classify"
         android:elevation="7dp"
+        android:textStyle="normal|bold"
         android:fontFamily="serif"
         android:textSize="18sp"
+        android:onClick="onClassifyClick"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/walking"
+        android:layout_alignEnd="@+id/walking"
+        android:layout_marginBottom="33dp" />
+
+    <Button
+        android:text="Train"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:id="@+id/train"
+        android:elevation="7dp"
         android:textStyle="normal|bold"
-        android:onClick="onRunningClick"/>
+        android:fontFamily="serif"
+        android:textSize="18sp"
+        android:onClick="onTrainingClicked"
+        android:layout_below="@+id/eating"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:text="Eating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="47dp"
+        android:layout_marginTop="41dp"
         android:id="@+id/eating"
         android:elevation="7dp"
         android:textStyle="normal|bold"
         android:fontFamily="serif"
         android:textSize="18sp"
+        android:onClick="onEatingClick"
         android:layout_below="@+id/running"
-        android:layout_centerHorizontal="true"
-        android:onClick="onEatingClick"/>
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="Running"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="39dp"
+        android:id="@+id/running"
+        android:elevation="7dp"
+        android:fontFamily="serif"
+        android:textSize="18sp"
+        android:textStyle="normal|bold"
+        android:onClick="onRunningClick"
+        android:layout_below="@+id/walking"
+        android:layout_alignRight="@+id/walking"
+        android:layout_alignEnd="@+id/walking" />
 
 
 </RelativeLayout>
